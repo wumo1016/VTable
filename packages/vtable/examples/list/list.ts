@@ -1,3 +1,4 @@
+import { field } from '@visactor/vchart/esm/util';
 import * as VTable from '../../src';
 import { bindDebugTool } from '../../src/scenegraph/debug-tool';
 const CONTAINER_ID = 'vTable';
@@ -34,165 +35,158 @@ VTable.register.icon('sort_normal', {
 });
 
 export function createTable() {
-  const records = generatePersons(2000);
-  const columns: VTable.ColumnsDefine = [
-    {
-      field: '',
-      title: '行号',
-      width: 80,
-      fieldFormat(data, col, row, table) {
-        return row - 1;
-      },
-      style: {
-        underline: true,
-        underlineDash: [2, 0],
-        underlineOffset: 3
-      }
-    },
+  // 给分页器留地方
+  const container = document.getElementById(CONTAINER_ID);
+  if(!container) return
+
+  container.style.height = container.offsetHeight - 70 + 'px';
+  createPagination(10, 1);
+
+  function generateRandomString(length) {
+    let result = '';
+    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
+    for (let i = 0; i < length; i++) {
+      result += characters.charAt(Math.floor(Math.random() * characters.length));
+    }
+    return result;
+  }
+  function generateRandomHobbies() {
+    const hobbies = [
+      'Reading books',
+      'Playing video games',
+      'Watching movies',
+      'Cooking',
+      'Hiking',
+      'Traveling',
+      'Photography',
+      'Playing musical instruments',
+      'Gardening',
+      'Painting',
+      'Writing',
+      'Swimming'
+    ];
+
+    const numHobbies = Math.floor(Math.random() * 3) + 1; // 生成 1-3 之间的随机整数
+    const selectedHobbies = [];
+
+    for (let i = 0; i < numHobbies; i++) {
+      const randomIndex = Math.floor(Math.random() * hobbies.length);
+      const hobby = hobbies[randomIndex];
+      selectedHobbies.push(hobby);
+      hobbies.splice(randomIndex, 1); // 确保每个爱好只选一次
+    }
+
+    return selectedHobbies.join(', ');
+  }
+  function generateRandomBirthday() {
+    const start = new Date('1970-01-01');
+    const end = new Date('2000-12-31');
+    const randomDate = new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()));
+    const year = randomDate.getFullYear();
+    const month = randomDate.getMonth() + 1;
+    const day = randomDate.getDate();
+    return `${year}-${month < 10 ? '0' + month : month}-${day < 10 ? '0' + day : day}`;
+  }
+
+  function generateRandomPhoneNumber() {
+    const areaCode = [
+      '130',
+      '131',
+      '132',
+      '133',
+      '134',
+      '135',
+      '136',
+      '137',
+      '138',
+      '139',
+      '150',
+      '151',
+      '152',
+      '153',
+      '155',
+      '156',
+      '157',
+      '158',
+      '159',
+      '170',
+      '176',
+      '177',
+      '178',
+      '180',
+      '181',
+      '182',
+      '183',
+      '184',
+      '185',
+      '186',
+      '187',
+      '188',
+      '189'
+    ];
+    const prefix = areaCode[Math.floor(Math.random() * areaCode.length)];
+    const suffix = String(Math.random()).substr(2, 8);
+    return prefix + suffix;
+  }
+
+  const generatePersons = count => {
+    return Array.from(new Array(count)).map((_, i) => {
+      const first = generateRandomString(10);
+      const last = generateRandomString(4);
+      return {
+        id: i + 1,
+        email1: `${first}_${last}@xxx.com`,
+        name: first,
+        lastName: last,
+        hobbies: generateRandomHobbies(),
+        birthday: generateRandomBirthday(),
+        tel: generateRandomPhoneNumber(),
+        sex: i % 2 === 0 ? 'boy' : 'girl',
+        work: i % 2 === 0 ? 'back-end engineer' : 'front-end engineer',
+        city: 'beijing'
+      };
+    });
+  };
+
+  const records = generatePersons(1000);
+  const columns = [
     {
       field: 'id',
       title: 'ID',
-      width: 'auto',
-      minWidth: 50,
-      sort: true,
-      disableSelect: true
+      width: 80,
+      sort: true
     },
     {
       field: 'email1',
       title: 'email',
-      width: 200,
-      sort: true,
-      headerStyle: {
-        marked: {
-          bgColor: 'red',
-          shape: 'rect',
-          position: 'right-top',
-          size: 10,
-          offset: 6
-        }
-      },
-      style: {
-        marked: args => {
-          const value = args.value;
-          if (value === '4@xxx.com') {
-            return {
-              bgColor: 'red',
-              shape: 'rect',
-              position: 'right-top',
-              size: 10,
-              offset: 6
-            };
-          }
-          return {
-            bgColor: 'red',
-            shape: 'triangle',
-            position: 'right-top',
-            size: 10,
-            offset: 6
-          };
-        },
-        underline: true,
-        underlineDash: [2, 0],
-        underlineOffset: 3
-      },
-      disableSelect: (col, row, table) => {
-        return row === 3;
-      }
+      width: 250,
+      sort: true
     },
     {
-      title: 'full name',
+      field: 'full name',
+      title: 'Full name',
       columns: [
         {
           field: 'name',
           title: 'First Name',
-          width: 200
+          width: 120
         },
         {
-          field: 'name',
+          field: 'lastName',
           title: 'Last Name',
-          width: 200
+          width: 100
         }
       ]
     },
     {
-      field: 'date1',
+      field: 'hobbies',
+      title: 'hobbies',
+      width: 200
+    },
+    {
+      field: 'birthday',
       title: 'birthday',
-      width: 200
-    },
-    {
-      field: 'sex',
-      title: 'sex',
-      width: 100
-    },
-    {
-      field: 'tel',
-      title: 'telephone',
-      width: 150
-    },
-    {
-      field: 'work',
-      title: 'job',
-      width: 200
-    },
-    {
-      field: 'city',
-      title: 'city',
-      width: 150
-    },
-    {
-      field: 'date1',
-      title: 'birthday',
-      width: 200
-    },
-    {
-      field: 'sex',
-      title: 'sex',
-      width: 100
-    },
-    {
-      field: 'tel',
-      title: 'telephone',
-      width: 150
-    },
-    {
-      field: 'work',
-      title: 'job',
-      width: 200
-    },
-    {
-      field: 'city',
-      title: 'city',
-      width: 150
-    },
-    {
-      field: 'date1',
-      title: 'birthday',
-      width: 200
-    },
-    {
-      field: 'sex',
-      title: 'sex',
-      width: 100
-    },
-    {
-      field: 'tel',
-      title: 'telephone',
-      width: 150
-    },
-    {
-      field: 'work',
-      title: 'job',
-      width: 200
-    },
-    {
-      field: 'city',
-      title: 'city',
-      width: 150
-    },
-    {
-      field: 'date1',
-      title: 'birthday',
-      width: 200
+      width: 120
     },
     {
       field: 'sex',
@@ -215,96 +209,91 @@ export function createTable() {
       width: 150
     }
   ];
-  const option: VTable.ListTableConstructorOptions = {
-    container: document.getElementById(CONTAINER_ID),
-    emptyTip: true,
+  const option = {
     records,
+    columns,
+    pagination: {
+      currentPage: 0,
+      perPageCount: 100
+    },
     rowSeriesNumber: {
+      field: 'id',
+      // field: 'email1',
+      title: '测试',
       dragOrder: true
-    },
-
-    columns: [
-      ...columns
-      // ...columns,
-      // ...columns,
-      // ...columns,
-      // ...columns,
-      // ...columns,
-      // ...columns,
-      // ...columns,
-      // ...columns,
-      // ...columns
-    ],
-    tooltip: {
-      isShowOverflowTextTooltip: true
-    },
-    frozenColCount: 1,
-    bottomFrozenRowCount: 2,
-    rightFrozenColCount: 2,
-    overscrollBehavior: 'none',
-    dragHeaderMode: 'all',
-    select: {
-      disableSelect: (row, col, table) => {
-        return row === 2 && col === 2;
-      }
-      // disableSelect: true
-    },
-    keyboardOptions: {
-      pasteValueToCell: true,
-      copySelected: true,
-      selectAllOnCtrlA: true,
-      ctrlMultiSelect: false
-    },
-    eventOptions: {
-      preventDefaultContextMenu: false
-    },
-    autoWrapText: true,
-    editor: '',
-    // theme: VTable.themes.ARCO,
-    // hover: {
-    //   highlightMode: 'cross'
-    // },
-    // select: {
-    //   headerSelectMode: 'cell',
-    //   highlightMode: 'cross'
-    // },
-    theme: {
-      frameStyle: {
-        cornerRadius: [10, 0, 0, 10],
-        // cornerRadius: 10,
-        borderLineWidth: [10, 0, 10, 10],
-        // borderLineWidth: 10,
-        borderColor: 'red',
-        shadowBlur: 0
-      },
-      columnResize: {
-        lineColor: 'red',
-        lineWidth: 2,
-        width: 1,
-        resizeHotSpotSize: 4
-      }
-    },
-    excelOptions: {
-      fillHandle: true
     }
-    // widthMode: 'adaptive'
-    // disableDblclickAutoResizeColWidth: false
   };
-  const tableInstance = new VTable.ListTable(document.getElementById(CONTAINER_ID)!, option);
-  window.tableInstance = tableInstance;
+  const tableInstance = new VTable.ListTable(document.getElementById(CONTAINER_ID), option);
+  window['tableInstance'] = tableInstance;
 
-  bindDebugTool(tableInstance.scenegraph.stage, {
-    customGrapicKeys: ['col', 'row']
-  });
+  // 创建分页组件的函数
+  function createPagination(totalPages, currentPage) {
+    if (document.getElementById('pagination-container')) {
+      document
+        .getElementById('pagination-container')
+        .parentElement.removeChild(document.getElementById('pagination-container'));
+    }
+    // 创建一个style元素来添加CSS样式
+    const style = document.createElement('style');
+    style.type = 'text/css';
+    style.innerText = `
+        .pagination {
+            display: inline-flex;
+            list-style: none;
+            padding: 0;
+            margin: 10;
+        }
+        .pagination li {
+            margin: 0 5px;
+        }
+        .pagination li a {
+            padding: 8px 12px;
+            text-decoration: none;
+            border: 1px solid #ddd;
+            color: #007bff;
+            background-color: #fff;
+            transition: background-color 0.3s;
+        }
+        .pagination li a:hover {
+            background-color: #e9ecef;
+        }
+        .pagination li a.active {
+            background-color: #007bff;
+            color: #fff;
+            border: 1px solid #007bff;
+        }
+    `;
+    document.head.appendChild(style);
+    const paginationContainer = document.createElement('div');
+    paginationContainer.id = 'pagination-container';
+    container.parentElement.appendChild(paginationContainer);
 
-  // tableInstance.on('sort_click', args => {
-  //   tableInstance.updateSortState(
-  //     {
-  //       field: args.field,
-  //       order: Date.now() % 3 === 0 ? 'desc' : Date.now() % 3 === 1 ? 'asc' : 'normal'
-  //     },
-  //     false
-  //   );
-  //   return false; //return false代表不执行内部排序逻辑
-  // });
+    paginationContainer.innerHTML = '';
+    // 创建一个无序列表作为分页的容器
+    const ul = document.createElement('ul');
+    ul.className = 'pagination';
+
+    // 为每一页创建一个列表项
+    for (let i = 1; i <= totalPages; i++) {
+      // 创建列表项
+      const li = document.createElement('li');
+      // 创建链接
+      const a = document.createElement('a');
+      a.innerText = i;
+      a.href = '?page=' + i;
+      a.className = i === currentPage ? 'active' : '';
+      a.onclick = function (event) {
+        event.preventDefault();
+        // 重新创建分页组件
+        createPagination(totalPages, i);
+        tableInstance.updatePagination({
+          currentPage: i - 1
+        });
+      };
+      li.appendChild(a);
+      ul.appendChild(li); // 将列表项添加到无序列表中
+    }
+
+    paginationContainer.appendChild(ul); // 将分页组件添加到容器中
+  }
 }

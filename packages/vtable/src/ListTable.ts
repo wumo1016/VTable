@@ -379,6 +379,9 @@ export class ListTable extends BaseTable implements ListTableAPI {
         return customMergeText;
       }
     }
+    // if(col === 0){
+    //   debugger
+    // }
     const table = this;
     if (table.internalProps.layoutMap.isSeriesNumber(col, row)) {
       if (table.internalProps.layoutMap.isSeriesNumberInHeader(col, row)) {
@@ -399,12 +402,13 @@ export class ListTable extends BaseTable implements ListTableAPI {
       } else {
         const define = table.getBodyColumnDefine(col, row);
         const checkboxSeriesNumberStyle = (table as ListTable).getFieldData(define.field, col, row);
-        if (typeof checkboxSeriesNumberStyle === 'string') {
+        if (['number', 'string'].includes(typeof checkboxSeriesNumberStyle)) {
           value = checkboxSeriesNumberStyle;
         } else if (checkboxSeriesNumberStyle?.text) {
           value = checkboxSeriesNumberStyle.text ?? '';
         } else {
           value = row - this.columnHeaderLevelCount + 1;
+          console.log(value);
         }
       }
       const { format } = table.internalProps.layoutMap.getSeriesNumberBody(col, row);
