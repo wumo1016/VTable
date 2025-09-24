@@ -1543,11 +1543,13 @@ export class DataSource extends EventTarget implements DataSourceAPI {
         this.restoreTreeHierarchyState();
         this.updatePagerData();
       } else {
+        const sourceRecordIndex = this.getRecordIndexPaths(sourceIndex) as number;
+        const targetRecordIndex = this.getRecordIndexPaths(targetIndex) as number;
         // 从source的二维数组中取出需要操作的records
-        const records = this.records.splice(sourceIndex, 1);
+        const records = this.records.splice(sourceRecordIndex, 1);
         // 将records插入到目标地址targetIndex处
         // 把records变成一个适合splice的数组（包含splice前2个参数的数组） 以通过splice来插入到source数组
-        records.unshift(targetIndex, 0);
+        records.unshift(targetRecordIndex, 0);
         Array.prototype.splice.apply(this.records, records);
       }
     }
