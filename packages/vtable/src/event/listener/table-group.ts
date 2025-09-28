@@ -767,7 +767,7 @@ export function bindTableGroupListener(eventManager: EventManager) {
   });
   // 注意和pointerup事件的处理 vrender中的事件系统： 是先触发pointerup 如果是点击到的场景树图元节点则会继续触发pointertap 否则不触发pointertap
   table.scenegraph.tableGroup.addEventListener('pointertap', (e: FederatedPointerEvent) => {
-    console.log('tableGroup', 'pointertap');
+    // console.log('tableGroup', 'pointertap');
     if (table.stateManager.columnResize.resizing) {
       return;
     }
@@ -890,7 +890,7 @@ export function bindTableGroupListener(eventManager: EventManager) {
     });
   });
   table.scenegraph.stage.addEventListener('pointerup', (e: FederatedPointerEvent) => {
-    console.log('stage', 'pointerup');
+    // console.log('stage', 'pointerup');
     // 处理列宽调整  这里和tableGroup.addEventListener('pointerup' 逻辑一样
     if (stateManager.interactionState === 'grabing') {
       // stateManager.interactionState = 'default';
@@ -905,7 +905,7 @@ export function bindTableGroupListener(eventManager: EventManager) {
   });
   // click outside
   table.scenegraph.stage.addEventListener('pointertap', (e: FederatedPointerEvent) => {
-    console.log('stage', 'pointertap');
+    // console.log('stage', 'pointertap');
     const target = e.target;
     if (
       // 如果是鼠标点击到canvas空白区域 则取消选中状态
@@ -1185,7 +1185,7 @@ export function bindGesture(eventManager: EventManager) {
     }
   });
   eventManager.gesture.on('doubletap', e => {
-    console.log('doubletap', e);
+    // console.log('doubletap', e);
     // e.preventDefault();
     dblclickHandler(e, table);
   });
