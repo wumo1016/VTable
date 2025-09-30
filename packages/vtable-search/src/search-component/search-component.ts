@@ -211,6 +211,24 @@ export class SearchComponent {
     };
   }
 
+  arrangeListCustomCellStyle(
+    list: { range?: VTable.TYPES.CellRange; row?: number; col?: number }[],
+    highlight: boolean
+  ) {
+    list.forEach(item => {
+      const { range, col, row } = item;
+      this.table.arrangeCustomCellStyle(
+        range
+          ? { range }
+          : {
+              col,
+              row
+            },
+        highlight ? '__search_component_highlight' : null
+      );
+    });
+  }
+
   updateCellStyle(highlight: boolean = true) {
     if (highlight == null) {
       if (this.queryResult?.length) {
