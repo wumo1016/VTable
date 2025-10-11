@@ -39,7 +39,6 @@ export function bindDBClickAutoColumnWidthEvent(table: BaseTableAPI) {
             state.columnResize.isRightFrozen
           );
         }
-
         if (
           (state.columnResize.col >= state.table.colCount - state.table.rightFrozenColCount &&
             !state.table.isPivotTable() &&
@@ -50,7 +49,6 @@ export function bindDBClickAutoColumnWidthEvent(table: BaseTableAPI) {
             state.table.colCount - state.table.rightFrozenColCount
           );
         }
-
         const colWidths = [];
         // 返回所有列宽信息
         for (let col = 0; col < table.colCount; col++) {
