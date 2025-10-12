@@ -1,3 +1,4 @@
+import { set } from 'lodash';
 import * as VTable from '../../src';
 const CONTAINER_ID = 'vTable';
 
@@ -190,5 +191,9 @@ fetch('https://lf9-dp-fe-cms-tos.byteorg.com/obj/bit-cloud/VTable/North_American
           filterFunc: record => ['Furniture'].includes(record['Category'])
         }
       ]);
+
+      setTimeout(() => {
+        console.log(tableInstance.getFilteredRecords());
+      });
     });
   });
