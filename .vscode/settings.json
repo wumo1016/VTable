@@ -17,7 +17,6 @@
   // Editor
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "editor.codeActionsOnSave": ["source.fixAll.eslint"],
-  "editor.formatOnSave": true,
   "editor.tabSize": 2,
   "editor.detectIndentation": false,
   // Typescript

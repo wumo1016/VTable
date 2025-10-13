@@ -1213,7 +1213,6 @@ export class DataSource extends EventTarget implements DataSourceAPI {
     this.lastFilterRules = this.dataConfig.filterRules;
     this.dataConfig.filterRules = filterRules;
     this._source = this.processRecords(this.dataSourceObj?.records ?? this.dataSourceObj);
-    console.log(1, this._source);
     this._sourceLength = this._source?.length || 0;
     this.sortedIndexMap.clear();
     this.currentIndexedData = Array.from({ length: this._sourceLength }, (_, i) => i);
@@ -1230,7 +1229,6 @@ export class DataSource extends EventTarget implements DataSourceAPI {
     this.lastFilterRules = this.dataConfig.filterRules;
     this.dataConfig.filterRules = filterRules;
     this._source = this.processRecords(this.dataSourceObj?.records ?? this.dataSourceObj);
-    console.log(2, this._source);
     this._sourceLength = this._source?.length || 0;
     // 初始化currentIndexedData 正常未排序。设置其状态
     this.currentIndexedData = Array.from({ length: this._sourceLength }, (_, i) => i);

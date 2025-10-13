@@ -1436,7 +1436,7 @@ use case: 对于透视图的场景上，点击图例项后 更新过滤规则 �
 
 获取过滤后的数据
 
-**PivotTable 专有**
+**ListTable、PivotTable 专有**
 
 ## setLegendSelected(Function)
 

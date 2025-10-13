@@ -1,74 +1,199 @@
+import { set } from 'lodash';
 import * as VTable from '../../src';
 const CONTAINER_ID = 'vTable';
 
-// import { ListTable, TYPES } from '@visactor/vtable';
-// import * as VTable from '@visactor/vtable';
-import { ListEditor, InputEditor } from '@visactor/vtable-editors';
-VTable.register.editor(
-  'list-editor',
-  new ListEditor({
-    values: ['1', '2', '3']
-  })
-);
-VTable.register.editor('input-editor', new InputEditor());
-
-function generateRandomHobbies() {
-  const hobbies = [
-    'Reading books',
-    'Playing video games',
-    'Watching movies',
-    'Cooking',
-    'Hiking',
-    'Traveling',
-    'Photography',
-    'Playing musical instruments',
-    'Gardening',
-    'Painting',
-    'Writing',
-    'Swimming'
-  ];
-
-  const numHobbies = Math.floor(Math.random() * 3) + 1; // 生成 1-3 之间的随机整数
-  const selectedHobbies: string[] = [];
-
-  for (let i = 0; i < numHobbies; i++) {
-    const randomIndex = Math.floor(Math.random() * hobbies.length);
-    const hobby = hobbies[randomIndex];
-    selectedHobbies.push(hobby);
-    hobbies.splice(randomIndex, 1);
-  }
-
-  return selectedHobbies.join(', ');
-}
-
-function generateRecords(count: number) {
-  return Array.from(new Array(count)).map((_, i) => {
-    return {
-      id: i + 1,
-      hobbies: generateRandomHobbies()
+let tableInstance;
+fetch('https://lf9-dp-fe-cms-tos.byteorg.com/obj/bit-cloud/VTable/North_American_Superstore_Pivot_Chart_data.json')
+  .then(res => res.json())
+  .then(data => {
+    const option = {
+      // records: data.slice(0, 10).filter(item => item.Quantity === '16'),
+      // records: data.slice(0, 100),
+      records: data,
+      rows: [
+        {
+          dimensionKey: 'Category',
+          title: 'Category',
+          headerStyle: {
+            textStick: true,
+            bgColor(arg) {
+              if (arg.dataValue === 'Row Totals') {
+                return '#ff9900';
+              }
+              return '#ECF1F5';
+            }
+          },
+          width: 'auto'
+        },
+        {
+          dimensionKey: 'Sub-Category',
+          title: 'Sub-Catogery',
+          headerStyle: {
+            textStick: true,
+            bgColor(arg) {
+              if (arg.dataValue === 'Sub Totals') {
+                return '#ba54ba';
+              }
+              return '#ECF1F5';
+            }
+          },
+          width: 'auto'
+        }
+      ],
+      columns: [
+        {
+          dimensionKey: 'Region',
+          title: 'Region',
+          headerStyle: {
+            textStick: true
+          },
+          width: 'auto'
+        },
+        {
+          dimensionKey: 'Segment',
+          title: 'Segment',
+          headerStyle: {
+            textStick: true
+          },
+          width: 'auto'
+        }
+      ],
+      indicators: [
+        {
+          indicatorKey: 'Quantity',
+          title: 'Quantity',
+          width: 'auto',
+          showSort: false,
+          headerStyle: {
+            fontWeight: 'normal'
+          },
+          style: {
+            padding: [16, 28, 16, 28],
+            color(args) {
+              if (args.dataValue >= 0) return 'black';
+              return 'red';
+            },
+            bgColor(arg) {
+              const rowHeaderPaths = arg.cellHeaderPaths.rowHeaderPaths;
+              if (rowHeaderPaths?.[1]?.value === 'Sub Totals') {
+                return '#ba54ba';
+              } else if (rowHeaderPaths?.[0]?.value === 'Row Totals') {
+                return '#ff9900';
+              }
+              return undefined;
+            }
+          }
+        },
+        {
+          indicatorKey: 'Sales',
+          title: 'Sales',
+          width: 'auto',
+          showSort: false,
+          headerStyle: {
+            fontWeight: 'normal'
+          },
+          format: rec => {
+            return '$' + Number(rec).toFixed(2);
+          },
+          style: {
+            padding: [16, 28, 16, 28],
+            color(args) {
+              if (args.dataValue >= 0) return 'black';
+              return 'red';
+            },
+            bgColor(arg) {
+              const rowHeaderPaths = arg.cellHeaderPaths.rowHeaderPaths;
+              if (rowHeaderPaths?.[1]?.value === 'Sub Totals') {
+                return '#ba54ba';
+              } else if (rowHeaderPaths?.[0]?.value === 'Row Totals') {
+                return '#ff9900';
+              }
+              return undefined;
+            }
+          }
+        },
+        {
+          indicatorKey: 'Profit',
+          title: 'Profit',
+          width: 'auto',
+          showSort: false,
+          headerStyle: {
+            fontWeight: 'normal'
+          },
+          format: rec => {
+            return '$' + Number(rec).toFixed(2);
+          },
+          style: {
+            padding: [16, 28, 16, 28],
+            color(args) {
+              if (args.dataValue >= 0) return 'black';
+              return 'red';
+            },
+            bgColor(arg) {
+              const rowHeaderPaths = arg.cellHeaderPaths.rowHeaderPaths;
+              if (rowHeaderPaths?.[1]?.value === 'Sub Totals') {
+                return '#ba54ba';
+              } else if (rowHeaderPaths?.[0]?.value === 'Row Totals') {
+                return '#ff9900';
+              }
+              return undefined;
+            }
+          }
+        }
+      ],
+      corner: {
+        titleOnDimension: 'row',
+        headerStyle: {
+          textStick: true
+        }
+      },
+      dataConfig: {
+        totals: {
+          row: {
+            showGrandTotals: true,
+            showSubTotals: true,
+            subTotalsDimensions: ['Category'],
+            grandTotalLabel: 'Row Totals',
+            subTotalLabel: 'Sub Totals'
+          },
+          column: {
+            showGrandTotals: true,
+            showSubTotals: true,
+            subTotalsDimensions: ['Region'],
+            grandTotalLabel: 'Column Totals',
+            subTotalLabel: 'Sub Totals'
+          }
+        },
+        filterRules: [
+          // {
+          //   filterKey: 'Quantity',
+          //   filteredValues: ['16']
+          // }
+          // {
+          //   filterFunc: record => record['Quantity'] === '16'
+          //   // filterFunc: record => record['Category'] === 'Furniture'
+          // }
+        ]
+      },
+      widthMode: 'standard'
     };
+
+    tableInstance = new VTable.PivotTable(document.getElementById(CONTAINER_ID), option);
+    window['tableInstance'] = tableInstance;
+
+    tableInstance.on('click_cell', () => {
+      tableInstance.updateFilterRules([
+        {
+          // filterKey: 'Category',
+          // filteredValues: ['Furniture']
+          // filterKey: 'Quantity',
+          // filteredValues: ['16']
+          filterFunc: record => ['Furniture'].includes(record['Category'])
+        }
+      ]);
+
+      setTimeout(() => {
+        console.log(tableInstance.getFilteredRecords());
+      });
+    });
   });
-}
-
-const records = generateRecords(10);
-
-const columns = [
-  {
-    field: 'id',
-    title: 'ID',
-    width: 80,
-    editor: 'list-editor'
-  },
-  {
-    field: 'hobbies',
-    title: 'hobbies',
-    width: 200
-  }
-];
-const option = {
-  records,
-  columns,
-  // widthMode: 'adaptive'
-  widthMode: 'standard'
-};
-const tableInstance = new VTable.ListTable(document.getElementById(CONTAINER_ID), option);

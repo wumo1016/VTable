@@ -344,6 +344,7 @@ export function createTable() {
     // widthMode: 'adaptive'
   };
   const tableInstance = new VTable.ListTable(option);
+  console.log(records);
   setTimeout(() => {
     tableInstance.updateFilterRules([
       {

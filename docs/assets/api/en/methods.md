@@ -1436,7 +1436,7 @@ use case: For pivot chart scenarios, update filtering rules after clicking legen
 
 Get filtered data
 
-**PivotTable specific**
+**ListTable, PivotTable specific**
 
 ## setLegendSelected(Function)
 
