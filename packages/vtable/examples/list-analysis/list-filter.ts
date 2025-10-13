@@ -345,7 +345,6 @@ export function createTable() {
   };
   const tableInstance = new VTable.ListTable(option);
   setTimeout(() => {
-    console.log(tableInstance.rowCount);
     tableInstance.updateFilterRules([
       {
         filterKey: 'sex',
@@ -359,7 +358,8 @@ export function createTable() {
     ]);
   }, 3000);
   window.tableInstance = tableInstance;
-  tableInstance.on('change_cell_value', arg => {
-    console.log(arg);
+  tableInstance.on('click_cell', arg => {
+    // console.log(arg);
+    console.log(tableInstance.getFilteredRecords());
   });
 }
