@@ -408,7 +408,6 @@ export class ListTable extends BaseTable implements ListTableAPI {
           value = checkboxSeriesNumberStyle.text ?? '';
         } else {
           value = row - this.columnHeaderLevelCount + 1;
-          console.log(value);
         }
       }
       const { format } = table.internalProps.layoutMap.getSeriesNumberBody(col, row);
