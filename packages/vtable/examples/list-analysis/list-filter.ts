@@ -363,4 +363,7 @@ export function createTable() {
     // console.log(arg);
     console.log(tableInstance.getFilteredRecords());
   });
+  tableInstance.on('click_cell', arg => {
+    console.log(tableInstance.getFilteredRecords());
+  });
 }
