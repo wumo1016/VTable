@@ -58,7 +58,8 @@
   },
   "dependencies": {
     "@visactor/vtable": "workspace:*",
-    "@visactor/vutils": "~0.19.1"
+    "@visactor/vutils": "~0.19.1",
+    "element-plus": "~2.11.5"
   },
   "devDependencies": {
     "@arco-design/web-vue": "^2.11.0",

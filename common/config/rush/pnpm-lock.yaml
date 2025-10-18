@@ -1142,6 +1142,7 @@ importers:
       axios: ^1.4.0
       chai: 4.3.4
       cross-env: ^7.0.3
+      element-plus: ~2.11.5
       eslint: ~8.18.0
       eslint-plugin-vue: ^9.26.0
       form-data: ~4.0.0
@@ -1172,6 +1173,7 @@ importers:
     dependencies:
       '@visactor/vtable': link:../vtable
       '@visactor/vutils': 0.19.7
+      element-plus: 2.11.5_vue@3.5.22
     devDependencies:
       '@arco-design/web-vue': 2.57.0_vue@3.5.22
       '@babel/core': 7.20.12
@@ -2762,6 +2764,11 @@ packages:
     dependencies:
       '@jridgewell/trace-mapping': 0.3.9
 
+  /@ctrl/tinycolor/3.6.1:
+    resolution: {integrity: sha512-SITSV6aIXsuVNV3f3O0f2n/cgyEDWoSqtZMYiAmcsYHydcKrOz3gUxB/iXd/Qf08+IZX4KpgNbvUdMBmWz+kcA==}
+    engines: {node: '>=10'}
+    dev: false
+
   /@electron/get/1.14.1:
     resolution: {integrity: sha512-BrZYyL/6m0ZXz/lDxy/nlVhQz+WF+iPS6qXolEU8atw7h6v1aYkjwJZ63m+bJMBTxDE66X+r2tPS4a/8C82sZw==}
     engines: {node: '>=8.6'}
@@ -2779,6 +2786,14 @@ packages:
     transitivePeerDependencies:
       - supports-color
     dev: true
+
+  /@element-plus/icons-vue/2.3.2_vue@3.5.22:
+    resolution: {integrity: sha512-OzIuTaIfC8QXEPmJvB4Y4kw34rSXdCJzxcD1kFStBvr8bK6X1zQAYDo0CNMjojnfTqRQCJ0I7prlErcoRiET2A==}
+    peerDependencies:
+      vue: ^3.2.0
+    dependencies:
+      vue: 3.5.22_typescript@4.9.5
+    dev: false
 
   /@esbuild/android-arm/0.15.18:
     resolution: {integrity: sha512-5GT+kcs2WVGjVs7+boataCkO5Fg0y4kCjzkB5bAip7H4jfnOS3dA6KPiww9W1OEKTKeAcUVhdZGvgI65OXmUnw==}
@@ -2844,6 +2859,23 @@ packages:
       lodash.isnil: 4.0.0
       lodash.isundefined: 3.0.1
       lodash.uniq: 4.5.0
+    dev: false
+
+  /@floating-ui/core/1.7.3:
+    resolution: {integrity: sha512-sGnvb5dmrJaKEZ+LDIpguvdX3bDlEllmv4/ClQ9awcmCZrlx5jQyyMWFM5kBI+EyNOCDDiKk8il0zeuX3Zlg/w==}
+    dependencies:
+      '@floating-ui/utils': 0.2.10
+    dev: false
+
+  /@floating-ui/dom/1.7.4:
+    resolution: {integrity: sha512-OOchDgh4F2CchOX94cRVqhvy7b3AFb+/rQXyswmzmGakRfkMgoWVjfnLWkRirfLEfuD4ysVW16eXzwt3jHIzKA==}
+    dependencies:
+      '@floating-ui/core': 1.7.3
+      '@floating-ui/utils': 0.2.10
+    dev: false
+
+  /@floating-ui/utils/0.2.10:
+    resolution: {integrity: sha512-aGTxbpbg8/b5JfU1HXSrbH3wXZuLPJcNEcZQFMxLs3oSzgtVu6nFPkbbGGUvBcUjKV2YyB9Wxxabo+HEH9tcRQ==}
     dev: false
 
   /@gulp-sourcemaps/identity-map/2.0.1:
@@ -2951,7 +2983,7 @@ packages:
       jest-resolve: 26.6.2
       jest-resolve-dependencies: 26.6.3
       jest-runner: 26.6.3_ts-node@10.9.0
-      jest-runtime: 26.6.3
+      jest-runtime: 26.6.3_ts-node@10.9.0
       jest-snapshot: 26.6.2
       jest-util: 26.6.2
       jest-validate: 26.6.2
@@ -3112,7 +3144,7 @@ packages:
       graceful-fs: 4.2.11
       jest-haste-map: 26.6.2
       jest-runner: 26.6.3_ts-node@10.9.0
-      jest-runtime: 26.6.3
+      jest-runtime: 26.6.3_ts-node@10.9.0
     transitivePeerDependencies:
       - bufferutil
       - canvas
@@ -3695,6 +3727,10 @@ packages:
       '@sinonjs/commons': 1.8.6
     dev: true
 
+  /@sxzz/popperjs-es/2.11.7:
+    resolution: {integrity: sha512-Ccy0NlLkzr0Ex2FKvh2X+OyERHXJ88XJ1MXtsI9y9fGexlaXaVTPzBCRBwIxFkORuOb+uBqeu+RqnpgYTEZRUQ==}
+    dev: false
+
   /@szmarczak/http-timer/1.1.2:
     resolution: {integrity: sha512-XIB2XbzHTN6ieIjfIMV9hlVcfPU26s2vafYWQcZHWXHOxiaRZYEDKEwdl129Zyg50+foYV2jCgtrqSA6qNuNSA==}
     engines: {node: '>=6'}
@@ -3950,9 +3986,18 @@ packages:
     resolution: {integrity: sha512-yg6E+u0/+Zjva+buc3EIb+29XEg4wltq7cSmd4Uc2EE/1nUVmxyzpX6gUXD0V8jIrG0r7YeOGVIbYRkxeooCtw==}
     dev: true
 
+  /@types/lodash-es/4.17.12:
+    resolution: {integrity: sha512-0NgftHUcV4v34VhXm8QBSftKVXtbkBG3ViCjs6+eJ5a6y6Mi/jiFGPc1sC7QK+9BFhWrURE3EOggmWaSxL9OzQ==}
+    dependencies:
+      '@types/lodash': 4.14.182
+    dev: false
+
   /@types/lodash/4.14.182:
     resolution: {integrity: sha512-/THyiqyQAP9AfARo4pF+aCGcyiQ94tX/Is2I7HofNRqoYLgN1PBoOWu2/zTA5zMxzP5EFutMtWtGAFRKUe961Q==}
-    dev: true
+
+  /@types/lodash/4.17.20:
+    resolution: {integrity: sha512-H3MHACvFUEiujabxhaI/ImO6gUrd8oOurg7LQtS7mbwIXA/cUqWrvBsaeJ23aZEPk1TAYkurjfMbSELfoCXlGA==}
+    dev: false
 
   /@types/markdown-it/13.0.9:
     resolution: {integrity: sha512-1XPwR0+MgXLWfTn9gCsZ55AHOKW1WN+P9vr0PaQh5aerR9LLQXUbjfEAFhjmEmyoYFWAyuN2Mqkn40MZ4ukjBw==}
@@ -4133,6 +4178,10 @@ packages:
     dependencies:
       '@types/expect': 1.20.4
       '@types/node': 24.7.2
+
+  /@types/web-bluetooth/0.0.16:
+    resolution: {integrity: sha512-oh8q2Zc32S6gd/j50GowEjKLoOVOwHP/bWVjKJInBwQqdOYMdPrf1oVlelTlyfFK3CKxL1uahMDAr+vy8T7yMQ==}
+    dev: false
 
   /@types/yargs-parser/21.0.0:
     resolution: {integrity: sha512-iO9ZQHkZxHn4mSakYV0vFHAVDyEOIJQrV2uZ06HxEPcx+mt8swXoZHIbaaJ2crJYFfErySgktuTZ3BeLz+XmFA==}
@@ -4608,6 +4657,31 @@ packages:
 
   /@vue/shared/3.5.22:
     resolution: {integrity: sha512-F4yc6palwq3TT0u+FYf0Ns4Tfl9GRFURDN2gWG7L1ecIaS/4fCIuFOjMTnCyjsu/OK6vaDKLCrGAa+KvvH+h4w==}
+
+  /@vueuse/core/9.13.0_vue@3.5.22:
+    resolution: {integrity: sha512-pujnclbeHWxxPRqXWmdkKV5OX4Wk4YeK7wusHqRwU0Q7EFusHoqNA/aPhB6KCh9hEqJkLAJo7bb0Lh9b+OIVzw==}
+    dependencies:
+      '@types/web-bluetooth': 0.0.16
+      '@vueuse/metadata': 9.13.0
+      '@vueuse/shared': 9.13.0_vue@3.5.22
+      vue-demi: 0.14.10_vue@3.5.22
+    transitivePeerDependencies:
+      - '@vue/composition-api'
+      - vue
+    dev: false
+
+  /@vueuse/metadata/9.13.0:
+    resolution: {integrity: sha512-gdU7TKNAUVlXXLbaF+ZCfte8BjRJQWPCa2J55+7/h+yDtzw3vOoGQDRXzI6pyKyo6bXFT5/QoPE4hAknExjRLQ==}
+    dev: false
+
+  /@vueuse/shared/9.13.0_vue@3.5.22:
+    resolution: {integrity: sha512-UrnhU+Cnufu4S6JLCPZnkWh0WwZGUp72ktOF2DFptMlOs3TOdVv8xJN53zhHGARmVOsz5KqOls09+J1NR6sBKw==}
+    dependencies:
+      vue-demi: 0.14.10_vue@3.5.22
+    transitivePeerDependencies:
+      - '@vue/composition-api'
+      - vue
+    dev: false
 
   /abab/2.0.6:
     resolution: {integrity: sha512-j2afSsaIENvHZN2B8GOpF566vZ5WVk5opAiMTvWgaQT8DkbOqsTfvNAvHoRGU2zzP8cPoqys+xHTRDWW8L+/BA==}
@@ -5105,6 +5179,10 @@ packages:
     engines: {node: '>= 0.10'}
     dependencies:
       async-done: 1.3.2
+    dev: false
+
+  /async-validator/4.2.5:
+    resolution: {integrity: sha512-7HhHjtERjqlNbZtqNqy2rckN/SpOOlmDliet+lP7k+eKZEjPk3DgyeU9lIXLdeLz0uBbbVp+9Qdow9wJWgwwfg==}
     dev: false
 
   /async/3.2.6:
@@ -6751,6 +6829,30 @@ packages:
     transitivePeerDependencies:
       - supports-color
     dev: true
+
+  /element-plus/2.11.5_vue@3.5.22:
+    resolution: {integrity: sha512-O+bIVHQCjUDm4GiIznDXRoS8ar2TpWLwfOGnN/Aam0VXf5kbuc4SxdKKJdovWNxmxeqbcwjsSZPKgtXNcqys4A==}
+    peerDependencies:
+      vue: ^3.2.0
+    dependencies:
+      '@ctrl/tinycolor': 3.6.1
+      '@element-plus/icons-vue': 2.3.2_vue@3.5.22
+      '@floating-ui/dom': 1.7.4
+      '@popperjs/core': /@sxzz/popperjs-es/2.11.7
+      '@types/lodash': 4.17.20
+      '@types/lodash-es': 4.17.12
+      '@vueuse/core': 9.13.0_vue@3.5.22
+      async-validator: 4.2.5
+      dayjs: 1.11.18
+      lodash: 4.17.21
+      lodash-es: 4.17.21
+      lodash-unified: 1.0.3_vpgwo5v3ie2bia5ss74pgoa5ly
+      memoize-one: 6.0.0
+      normalize-wheel-es: 1.2.0
+      vue: 3.5.22_typescript@4.9.5
+    transitivePeerDependencies:
+      - '@vue/composition-api'
+    dev: false
 
   /emittery/0.7.2:
     resolution: {integrity: sha512-A8OG5SR/ij3SsJdWDJdkkSYUjQdCUx6APQXem0SaEePBSRg4eymGYwBkKo1Y6DU+af/Jn2dBQqDBvjnr9Vi8nQ==}
@@ -9754,7 +9856,7 @@ packages:
       jest-leak-detector: 26.6.2
       jest-message-util: 26.6.2
       jest-resolve: 26.6.2
-      jest-runtime: 26.6.3
+      jest-runtime: 26.6.3_ts-node@10.9.0
       jest-util: 26.6.2
       jest-worker: 26.6.2
       source-map-support: 0.5.21
@@ -9795,42 +9897,6 @@ packages:
       slash: 2.0.0
       strip-bom: 3.0.0
       yargs: 13.3.2
-    transitivePeerDependencies:
-      - supports-color
-    dev: true
-
-  /jest-runtime/26.6.3:
-    resolution: {integrity: sha512-lrzyR3N8sacTAMeonbqpnSka1dHNux2uk0qqDXVkMv2c/A3wYnvQ4EXuI013Y6+gSKSCxdaczvf4HF0mVXHRdw==}
-    engines: {node: '>= 10.14.2'}
-    hasBin: true
-    dependencies:
-      '@jest/console': 26.6.2
-      '@jest/environment': 26.6.2
-      '@jest/fake-timers': 26.6.2
-      '@jest/globals': 26.6.2
-      '@jest/source-map': 26.6.2
-      '@jest/test-result': 26.6.2
-      '@jest/transform': 26.6.2
-      '@jest/types': 26.6.2
-      '@types/yargs': 15.0.19
-      chalk: 4.1.2
-      cjs-module-lexer: 0.6.0
-      collect-v8-coverage: 1.0.2
-      exit: 0.1.2
-      glob: 7.2.3
-      graceful-fs: 4.2.11
-      jest-config: 26.6.3_ts-node@10.9.0
-      jest-haste-map: 26.6.2
-      jest-message-util: 26.6.2
-      jest-mock: 26.6.2
-      jest-regex-util: 26.0.0
-      jest-resolve: 26.6.2
-      jest-snapshot: 26.6.2
-      jest-util: 26.6.2
-      jest-validate: 26.6.2
-      slash: 3.0.0
-      strip-bom: 4.0.0
-      yargs: 15.4.1
     transitivePeerDependencies:
       - supports-color
     dev: true
@@ -10494,6 +10560,22 @@ packages:
       p-locate: 5.0.0
     dev: true
 
+  /lodash-es/4.17.21:
+    resolution: {integrity: sha512-mKnC+QJ9pWVzv+C4/U3rRsHapFfHvQFoFB92e52xeyGMcX6/OlIl78je1u8vePzYZSkkogMPJ2yjxxsb89cxyw==}
+    dev: false
+
+  /lodash-unified/1.0.3_vpgwo5v3ie2bia5ss74pgoa5ly:
+    resolution: {integrity: sha512-WK9qSozxXOD7ZJQlpSqOT+om2ZfcT4yO+03FuzAHD0wF6S0l0090LRPDx3vhTTLZ8cFKpBn+IOcVXK6qOcIlfQ==}
+    peerDependencies:
+      '@types/lodash-es': '*'
+      lodash: '*'
+      lodash-es: '*'
+    dependencies:
+      '@types/lodash-es': 4.17.12
+      lodash: 4.17.21
+      lodash-es: 4.17.21
+    dev: false
+
   /lodash.camelcase/4.3.0:
     resolution: {integrity: sha512-TwuEnCnxbc3rAvhf/LbG7tJUDzhqXyFnv3dtzLOPgCG/hODL7WFnsbwktkD7yUV0RrreP/l1PALq/YSg6VvjlA==}
     dev: false
@@ -10760,6 +10842,10 @@ packages:
 
   /mdurl/1.0.1:
     resolution: {integrity: sha512-/sKlQJCBYVY9Ers9hqzKou4H6V5UWc/M59TH2dvkt+84itfnq7uFOMLpOiOS4ujvHP4etln18fmIxA5R5fll0g==}
+
+  /memoize-one/6.0.0:
+    resolution: {integrity: sha512-rkpe71W0N0c0Xz6QD0eJETuWAJGnJ9afsl1srmwPrI+yBCkge5EycXXbYRyvL29zZVUWQCY7InPRCv3GDXuZNw==}
+    dev: false
 
   /memoizee/0.4.17:
     resolution: {integrity: sha512-DGqD7Hjpi/1or4F/aYAspXKNm5Yili0QDAFAY4QYvpqpgiY6+1jOfqpmByzjxbWd/T9mChbCArXAbDAsTm5oXA==}
@@ -11061,6 +11147,10 @@ packages:
   /normalize-url/6.1.0:
     resolution: {integrity: sha512-DlL+XwOy3NxAQ8xuC0okPgK46iuVNAK01YN7RueYBqqFeGsBjV9XmCAzAdgt+667bCl5kPh9EqKKDwnaPG1I7A==}
     engines: {node: '>=10'}
+    dev: false
+
+  /normalize-wheel-es/1.2.0:
+    resolution: {integrity: sha512-Wj7+EJQ8mSuXr2iWfnujrimU35R2W4FAErEyTmJoJ7ucwTn2hOUSsRehMb5RSYkxXGTM7Y9QpvPmp++w5ftoJw==}
     dev: false
 
   /now-and-later/2.0.1:
@@ -14781,6 +14871,21 @@ packages:
       - supports-color
       - terser
     dev: true
+
+  /vue-demi/0.14.10_vue@3.5.22:
+    resolution: {integrity: sha512-nMZBOwuzabUO0nLgIcc6rycZEebF6eeUfaiQx9+WSk8e29IbLvPU9feI6tqW4kTo3hvoYAJkMh8n8D0fuISphg==}
+    engines: {node: '>=12'}
+    hasBin: true
+    requiresBuild: true
+    peerDependencies:
+      '@vue/composition-api': ^1.0.0-rc.1
+      vue: ^3.0.0-0 || ^2.6.0
+    peerDependenciesMeta:
+      '@vue/composition-api':
+        optional: true
+    dependencies:
+      vue: 3.5.22_typescript@4.9.5
+    dev: false
 
   /vue-eslint-parser/9.4.3_eslint@8.18.0:
     resolution: {integrity: sha512-2rYRLWlIpaiN8xbPiDyXZXRgLGOtWxERV7ND5fFAv5qo1D2N9Fu9MNajBNc6o13lZ+24DAWCkQCvj4klgmcITg==}
