@@ -15,6 +15,8 @@ import ListTable from './table/gramatical/composition/ListTable.vue';
 import ListTableTree from './table/gramatical/composition/ListTable-tree.vue';
 import ListTableEditor from './table/gramatical/composition/ListTable-editor.vue';
 import ListTableEditorArco from './table/gramatical/composition/ListTable-editor-arco.vue';
+import ListTableEditorRender from './table/gramatical/composition/ListTable-editor-render.vue';
+
 import ListTableDes from './table/gramatical/composition/ListTable-destruction.vue';
 import ListTableCustom from './table/gramatical/composition/ListTable-custom.vue';
 import ListTableCustomHover from './table/gramatical/composition/ListTable-custom-hover.vue';
@@ -49,9 +51,10 @@ import singleRadio from './table/single/single-radio.vue';
   <!-- gramatical -->
   <!-- ---------- -->
 
-  <ListTable/>
+  <!-- <ListTable/> -->
   <!-- <ListTableEditor /> -->
   <!-- <ListTableEditorArco /> -->
+  <ListTableEditorRender />
   <!-- <ListTableDes /> -->
   <!-- <ListTableTree /> -->
   <!-- <ListTableCustom />  -->

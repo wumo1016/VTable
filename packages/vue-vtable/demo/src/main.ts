@@ -3,7 +3,7 @@ import App from './App.vue';
 import { ListTable, PivotTable, PivotChart } from '../../src/index';
 import ArcoVue from '@arco-design/web-vue';
 import '@arco-design/web-vue/dist/arco.css';
-// import './index.css';
+import './index.css';
 
 const app = createApp(App);
 app.use(ArcoVue);
