@@ -33,6 +33,7 @@ importers:
       buble: ^0.20.0
       chalk: ^3.0.0
       chokidar: ^3.5.0
+      element-plus: ~2.11.5
       fs-extra: 10.1.0
       globby: 11.1.0
       highlight.js: ^11.8.0
@@ -65,6 +66,7 @@ importers:
       '@vue/compiler-dom': 3.5.22
       axios: 1.12.2
       buble: 0.20.0
+      element-plus: 2.11.5_vue@3.5.22
       highlight.js: 11.11.1
       lodash: 4.17.21
       markdown-it: 13.0.2
@@ -5492,6 +5494,7 @@ packages:
 
   /bindings/1.5.0:
     resolution: {integrity: sha512-p2q/t/mhvuOj/UeLlV6566GD/guowlr0hHxClI0W9m7MWYkL1F0hLo+0Aexs9HSPCtR1SXQ0TD3MMKrXZajbiQ==}
+    requiresBuild: true
     dependencies:
       file-uri-to-path: 1.0.0
     optional: true
@@ -7791,6 +7794,7 @@ packages:
 
   /file-uri-to-path/1.0.0:
     resolution: {integrity: sha512-0Zt+s3L7Vf1biwWZ29aARiVYLx7iMGnEUl9x33fbB/j3jR81u/O2LbqK+Bm1CDSNDKVtJ/YjwY7TUd5SkeLQLw==}
+    requiresBuild: true
     optional: true
 
   /fill-range/4.0.0:
@@ -11034,6 +11038,7 @@ packages:
 
   /nan/2.23.0:
     resolution: {integrity: sha512-1UxuyYGdoQHcGg87Lkqm3FzefucTa0NAiOcuRsDmysep3c1LVCRK2krrUDafMWtjSG04htvAmvg96+SDknOmgQ==}
+    requiresBuild: true
     optional: true
 
   /nanoid/3.1.25:
