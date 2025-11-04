@@ -1,17 +1,23 @@
-	<template>
-  <vue-list-table :options="tableOptions" :records="records" :keep-column-width-change="keepColumnWidthChange"
-    @on-dropdown-menu-click="handleDropdownMenuClick" @on-mouse-enter-cell="handleMouseEnterCell"
-    @on-selected-clear="handleSelectedClear" @on-click-cell="handleSelectCell" ref="tableRef">
+<template>
+  <vue-list-table :options="tableOptions" :records="records" ref="tableRef">
     <ListColumn key="0" field="0" title="名字" max-width="300" :drag-header="true" />
-    <ListColumn key="1" field="1" title="年龄" max-width="300" :drag-header="true" />
-    <ListColumn key="2" field="2" title="性别" max-width="300" :drag-header="true" />
+    <!-- <ListColumn title="年龄" field="1" /> -->
+    <ListColumn title="年龄" :columns="[{ key: '1', field: '1', title: '年龄2' }]" />
+    <ListColumn key="2" field="2" title="性别" max-width="300" :drag-header="true">
+      <template #headerCustomLayout="{ width, height }">
+        <Group :width="width" :height="height" display="flex" align-items="center" :vue="{}">
+          <ATag color="green"> 性别 </ATag>
+        </Group>
+      </template>
+    </ListColumn>
     <ListColumn key="3" field="3" title="爱好" max-width="300" :drag-header="true" />
   </vue-list-table>
 </template>
 
 <script setup lang="ts">
 import { ref } from 'vue';
-import { ListColumn } from '../../../../../src/components/index';
+import { Tag as ATag } from '@arco-design/web-vue';
+import { Group, ListColumn } from '../../../../../src/components/index';
 
 //优先级：records > tableOptions.records
 const records = ref([
@@ -20,7 +26,7 @@ const records = ref([
   ['王五', 22, '男', '羽毛球'],
   ['赵六', 24, '女', '乒乓球']
 ]);
-const tableRef = ref()
+const tableRef = ref();
 const tableOptions = ref({
   columns: [
     {
@@ -50,45 +56,10 @@ const tableOptions = ref({
     ['王五', 22, '男', '羽毛球'],
     ['赵六', 24, '女', '乒乓球']
   ],
-  menu: {
-    contextMenuItems: ['copy', 'paste', 'delete', '...']
-  },
-  keyboardOptions:{
-    ctrlMultiSelect: false,
-    shiftMultiSelect: false,
-  },
-  select: {
-    ignoreCtrlForSelectCells: true
+  defaultHeaderRowHeight: 40,
+  defaultRowHeight: 80,
+  customConfig: {
+    createReactContainer: true
   }
 });
-
-const keepColumnWidthChange = ref(true);
-
-// update record
-window.update = () => {
-  records.value = [
-    ['张三1', 18, '男', '篮球'],
-    ['李四1', 20, '女', '足球'],
-    ['王五1', 22, '男', '羽毛球'],
-    ['赵六1', 24, '女', '乒乓球']
-  ];
-};
-const handleSelectCell = (args) => {
-  console.log(args,'args',tableRef)
-  // tableRef.value.vTableInstance.selectCells([ { start: { col: 1, row: 3 }, end: { col: 4, row: 6 } },  { start: { col: 0, row: 4 }, end: { col: 7, row: 4 } }])
-}
-// 定义 handleDropdownMenuClick 方法
-const handleDropdownMenuClick = args => {
-  console.log('menu click', tableOptions.value);
-  console.log('menu click', args);
-};
-
-// 定义 handleMouseEnterCell 方法
-const handleMouseEnterCell = args => {
-  // console.log('mouse enter cell', args);
-};
-// 定义 handleSelectedClear 方法
-const handleSelectedClear = args => {
-  // alert('selected clear');
-};
 </script>

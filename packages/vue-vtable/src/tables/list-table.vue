@@ -17,7 +17,6 @@ import { ref, computed, defineProps, useSlots, defineExpose } from 'vue';
 import { flattenVNodes, extractListSlotOptions, mergeSlotOptions } from '../utils';
 import BaseTable from './base-table.vue';
 
-
 // 定义属性接口
 interface Props {
   options: Record<string, unknown>;
@@ -37,11 +36,13 @@ const slots = useSlots();
 const computedOptions = computed(() => {
   const flattenedSlots = flattenVNodes(slots.default?.() || []);
   const slotOptions = extractListSlotOptions(flattenedSlots);
-  return mergeSlotOptions(props.options, slotOptions);
+  const options = mergeSlotOptions(props.options, slotOptions);
+  console.log(options);
+  return options;
 });
 
 // 暴露实例
 defineExpose({
-  vTableInstance: computed(() => baseTableRef.value?.vTableInstance || null),
+  vTableInstance: computed(() => baseTableRef.value?.vTableInstance || null)
 });
 </script>
