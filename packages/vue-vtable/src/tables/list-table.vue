@@ -37,7 +37,6 @@ const computedOptions = computed(() => {
   const flattenedSlots = flattenVNodes(slots.default?.() || []);
   const slotOptions = extractListSlotOptions(flattenedSlots);
   const options = mergeSlotOptions(props.options, slotOptions);
-  console.log(options);
   return options;
 });
 
