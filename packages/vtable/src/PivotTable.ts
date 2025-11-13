@@ -578,9 +578,8 @@ export class PivotTable extends BaseTable implements PivotTableAPI {
     table.colCount = layoutMap.colCount ?? 0;
     table.rowCount = layoutMap.rowCount ?? 0;
 
-    this.internalProps.frozenColCount = this.options.frozenColCount
-      ? this.options.frozenColCount
-      : (layoutMap.rowHeaderLevelCount ?? 0) + layoutMap.leftRowSeriesNumberColumnCount;
+    this.internalProps.frozenColCount =
+      this.options.frozenColCount ?? (layoutMap.rowHeaderLevelCount ?? 0) + layoutMap.leftRowSeriesNumberColumnCount;
     //   this.internalProps.frozenColCount= Math.max(
     //   (layoutMap.rowHeaderLevelCount ?? 0) + layoutMap.leftRowSeriesNumberColumnCount,
     //   this.options.frozenColCount ?? 0
@@ -2198,7 +2197,9 @@ export class PivotTable extends BaseTable implements PivotTableAPI {
       cellLocation
     };
   }
-
+  getCellRowHeaderFullPaths(col: number): IDimensionInfo[] {
+    return this.internalProps.layoutMap.getCellRowHeaderFullPaths(col);
+  }
   /**
    * 开启层级节点展开的loading动画状态，在设置数据调用setRecordChildren后会自动关闭loading
    * @param col
