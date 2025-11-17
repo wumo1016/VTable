@@ -83,6 +83,10 @@ export class EditManager {
     }
     const editor = (this.table as ListTableAPI).getEditor(col, row);
     if (editor) {
+      // 序号不允许编辑
+      if (this.table.internalProps.layoutMap.isSeriesNumber(col, row)) {
+        return;
+      }
       // //自定义内容单元格不允许编辑
       // if (this.table.getCustomRender(col, row) || this.table.getCustomLayout(col, row)) {
       //   console.warn("VTable Warn: cell has config custom render or layout, can't be edited");

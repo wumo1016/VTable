@@ -1,101 +1,109 @@
 import * as VTable from '@visactor/vtable';
 import { bindDebugTool } from '@visactor/vtable/es/scenegraph/debug-tool';
 import * as VTablePlugins from '../../src';
-import { InputEditor } from '@visactor/vtable-editors';
+import * as VTable_editors from '@visactor/vtable-editors';
 import { register } from '@visactor/vtable';
-import { editor } from '@visactor/vtable/es/register';
 
 const CONTAINER_ID = 'vTable';
-// 生成示例数据
-const generateTestData = count => {
-  return Array.from(new Array(count)).map((_, i) => {
-    return i <= 2
-      ? {
-          id: i + 1,
-          name: `第${i + 1}章`,
-          arithmetic: i * 100 + 100,
-          geometric: Math.pow(2, i),
-          date: new Date(2024, 0, i + 27).toLocaleDateString(),
-          week: i < 1 ? `星期一` : null,
-          chineseNumber: i < 1 ? `一` : null,
-          otherDirection_1: null,
-          otherDirection_2: null
+
+const input_editor = new VTable_editors.InputEditor();
+VTable.register.editor('input', input_editor);
+
+// 注册插件
+const addRowColumn = new VTablePlugins.AddRowColumnPlugin({
+    addColumnCallback: col => {
+      // 新增列时，重置列数
+      columnSeries.resetColumnCount(columnSeries.pluginOptions.columnCount + 1);
+      // 将table实例中的数据源records每一个数组中新增一个空字符串，对应新增的列
+      const newRecords = tableInstance.records.map(record => {
+        if (Array.isArray(record)) {
+          record.splice(col - 1, 0, '');
         }
-      : {};
-  });
-};
-
-const inputEditor = new InputEditor();
-register.editor('input', inputEditor);
-export function createTable() {
-  const records = generateTestData(20);
-
-  const columns = [
-    {
-      field: 'id',
-      title: 'ID',
-      width: 80
+        return record;
+      });
+      tableInstance.setRecords(newRecords);
     },
-    {
-      field: 'name',
-      title: '章节',
-      width: 150
-    },
-    {
-      field: 'arithmetic',
-      title: '等差',
-      width: 120
-    },
-    {
-      field: 'geometric',
-      title: '等比',
-      width: 120
-    },
-    {
-      field: 'date',
-      title: '日期',
-      width: 120
-    },
-    {
-      field: 'week',
-      title: '星期',
-      width: 120
-    },
-    {
-      field: 'chineseNumber',
-      title: '中文数字',
-      width: 120
-    },
-    {
-      field: 'otherDirection_1',
-      title: '向其他方向拖拽',
-      width: 150
-    },
-    {
-      field: 'otherDirection_2',
-      title: '',
-      width: 120
+    addRowCallback: row => {
+      // 新增行时，填充空行数据
+      tableInstance.addRecord([], row - tableInstance.columnHeaderLevelCount);
     }
-  ];
-
-  // 创建自动填充插件
-  const autoFillPlugin = new VTablePlugins.AutoFillPlugin({
-    fastFillMode: 'copy',
-    fillMode: 'series'
   });
 
-  // 创建表格配置
-  const option = {
-    container: document.getElementById(CONTAINER_ID),
-    columns,
-    records,
-    editor: inputEditor,
-    excelOptions: {
-      fillHandle: true // 启用填充炳功能
-    },
-    plugins: [autoFillPlugin]
-  };
-
-  // 创建表格实例
-  const tableInstance = new VTable.ListTable(option);
-}
+const columnSeries = new VTablePlugins.ColumnSeriesPlugin({
+  columnCount: 26,
+  autoExtendColumnTriggerKeys: ['ArrowRight', 'Tab']
+});
+const rowSeries = new VTablePlugins.RowSeriesPlugin({
+  rowCount: 100,
+  autoExtendRowTriggerKeys: ['ArrowDown', 'Enter'],
+  //records数据以外 填充空行数据
+  fillRowRecord: index => {
+    return [];
+  },
+  rowSeriesNumber: {
+    width: 'auto'
+  }
+});
+const highlightPlugin = new VTablePlugins.HighlightHeaderWhenSelectCellPlugin({
+  colHighlight: true,
+  rowHighlight: true
+});
+const excelEditCellKeyboardPlugin = new VTablePlugins.ExcelEditCellKeyboardPlugin();
+const pasteAddRowColumnPlugin = new VTablePlugins.PasteAddRowColumnPlugin({
+  addColumnCallback: col => {
+    // 新增列时，重置列数
+    columnSeries.resetColumnCount(columnSeries.pluginOptions.columnCount + 1);
+    // 将table实例中的数据源records每一个数组中新增一个空字符串，对应新增的列
+    const newRecords = tableInstance.records.map(record => {
+      if (Array.isArray(record)) {
+        record.splice(col - 1, 0, '');
+      }
+      return record;
+    });
+    tableInstance.setRecords(newRecords);
+  }
+});
+const option = {
+  // 二维数组的数据 和excel的行列一致
+  records: [
+    ['姓名', '年龄', '地址'],
+    ['张三', 18, '北京'],
+    ['李四', 20, '上海'],
+    ['王五', 22, '广州'],
+    ['赵六', 24, '深圳'],
+    ['孙七', 26, '成都']
+  ],
+  padding: 30,
+  editor: 'input',
+  editCellTrigger: ['api', 'keydown', 'doubleclick'], // 编辑单元格触发方式
+  select: {
+    cornerHeaderSelectMode: 'body',
+    headerSelectMode: 'body'
+  },
+  // theme: VTable.themes.DEFAULT.extends({
+  //   defaultStyle: {
+  //     textAlign: 'left',
+  //     padding: [2, 6, 2, 6]
+  //   },
+  //   headerStyle: {
+  //     textAlign: 'center'
+  //   }
+  // }),
+  // frozenColCount: 1,
+  defaultRowHeight: 30,
+  // keyboardOptions: {
+  //   moveFocusCellOnEnter: true,
+  //   copySelected: true,
+  //   pasteValueToCell: true
+  // },
+  plugins: [
+    addRowColumn,
+    columnSeries,
+    rowSeries,
+    // highlightPlugin,
+    // excelEditCellKeyboardPlugin,
+    // pasteAddRowColumnPlugin
+  ],
+};
+const tableInstance = new VTable.ListTable(document.getElementById(CONTAINER_ID), option);
+window.tableInstance = tableInstance;
