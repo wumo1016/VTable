@@ -38,6 +38,7 @@ export class FilterToolbar {
   }
 
   private onTabSwitch(tab: 'byValue' | 'byCondition'): void {
+    debugger
     this.activeTab = tab;
     if (tab === 'byValue') {
       this.valueFilter.show();

@@ -77,6 +77,7 @@ export class FilterPlugin implements pluginsDefinition.IVTablePlugin {
       this.filterToolbar.render(document.body);
       this.updateFilterIcons(this.columns);
       this.filterStateManager.subscribe(() => {
+        debugger
         this.updateFilterIcons(this.columns);
         (this.table as ListTable).updateColumns(this.columns, {
           clearRowHeightCache: false

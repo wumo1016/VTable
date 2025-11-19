@@ -1,5 +1,4 @@
 import * as VTable from '@visactor/vtable';
-import { bindDebugTool } from '@visactor/vtable/es/scenegraph/debug-tool';
 import { FilterPlugin } from '../../src/filter';
 const CONTAINER_ID = 'vTable';
 
@@ -67,13 +66,6 @@ export function createTable() {
       title: '性别',
       width: 100
     },
-    // {
-    //   field: 'avatar',
-    //   title: '头像',
-    //   width: 100,
-    //   cellType: 'image',
-    //   keepAspectRatio: true
-    // },
     {
       field: 'salary',
       title: '薪资',
@@ -103,30 +95,12 @@ export function createTable() {
       title: '部门',
       width: 100
     },
-    // {
-    //   field: 'favoriteColor',
-    //   title: '喜好',
-    //   width: 120,
-    //   style: {
-    //     bgColor: (args: any) => args.value
-    //   }
-    // },
     {
       field: 'status',
       title: '状态',
       width: 120,
       style: {
         textAlign: 'center'
-        // color: (args: any) => {
-        //   const { value } = args;
-        //   if (value === '在职') {
-        //     return '#7ed321';
-        //   }
-        //   if (value === '请假') {
-        //     return '#f5a623';
-        //   }
-        //   return '#ff5a5f'; // 离职
-        // }
       }
     },
     {
@@ -156,7 +130,5 @@ export function createTable() {
   const tableInstance = new VTable.ListTable(option);
   (window as any).tableInstance = tableInstance;
 
-  bindDebugTool(tableInstance.scenegraph.stage, {
-    customGrapicKeys: ['col', 'row']
-  });
+
 }
