@@ -76,7 +76,6 @@ export class FilterStateManager {
   }
 
   private reduce(state: FilterState, action: FilterAction): FilterState {
-    debugger
     const { type, payload } = action;
     const newFilter = new Map(state.filters);
     switch (type) {
