@@ -21,14 +21,11 @@ import * as ArcoDesignVue from '@arco-design/web-vue';
 import * as ArcoDesignIcon from '@arco-design/web-react/icon';
 import '@arco-design/web-react/dist/css/arco.css';
 import '@arco-design/web-vue/dist/arco.css';
-import * as ElementPlus from 'element-plus';
-import 'element-plus/dist/index.css';
 import { createApp, ref, onMounted, h } from 'vue';
 
 (window as any).ArcoDesign = ArcoDesign;
 (window as any).ArcoDesignVue = ArcoDesignVue;
 (window as any).ArcoDesignIcon = ArcoDesignIcon;
-(window as any).ElementPlus = ElementPlus;
 (window as any).VTable = VTable;
 (window as any).VRender = VRender;
 (window as any).VTableGantt = VTableGantt;
